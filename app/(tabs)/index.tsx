@@ -3,7 +3,6 @@ import { FlatList, StatusBar, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text } from "react-native";
 import { PetCard } from "@/components/PetCard";
-import { Animal } from "@/dummy-data/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPets } from "@/services/auth";
 
