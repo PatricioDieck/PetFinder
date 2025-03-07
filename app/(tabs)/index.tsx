@@ -18,6 +18,7 @@ export default function HomeScreen() {
   } = useInfiniteQuery({
     queryKey: ["animals"],
     queryFn: ({ pageParam = 1 }) => fetchPets(pageParam),
+    initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => {
       if (lastPage.pagination.current_page < lastPage.pagination.total_pages) {
         return lastPage.pagination.current_page + 1;
