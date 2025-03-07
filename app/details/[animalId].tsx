@@ -102,7 +102,7 @@ const DetailsScreen = () => {
           </View>
 
           {/* Description */}
-          <View className="mt-4 mb-8">
+          <View className="  mt-4 mb-8">
             <Text className=" text-xl">
               {pet.description || "No description available."}
             </Text>

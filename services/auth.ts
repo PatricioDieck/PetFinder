@@ -7,8 +7,6 @@ const CLIENT_ID = "pCtVn4j9WVsPLQpBOBP5ZuA24mxAtka6ga8DnCKHEEKnyXUykP";
 const CLIENT_SECRET = "Ay5fFXJQg5MhKfIEgGqL36yKUjYnLRNqDb2v7UuA";
 
 export async function getToken() {
-    const token = await SecureStore.getItemAsync('petfinderToken');
-    if (token) return token;
 
     try {
         const response = await fetch("https://api.petfinder.com/v2/oauth2/token", {
@@ -20,6 +18,7 @@ export async function getToken() {
         });
 
         const data = await response.json();
+        console.log("access token", data.access_token);
         await SecureStore.setItemAsync('petfinderToken', data.access_token);
         return data.access_token;
 
@@ -41,6 +40,7 @@ export async function fetchPets() {
         },
     });
 
+    console.log("response", response);
     return response.json();
 } 
 
