@@ -1,13 +1,12 @@
 # Pet Finder App
 
-A React Native mobile application built with Expo that helps users find and save their favorite animals using the Petfinder API.
+A React Native mobile application built with Expo that helps users find and save their favorite animals using the Purina Petfinder API.
 
-## Features
-
-- ✅ Browse adoptable animals with infinite scrolling
-- ✅ View detailed information about each animal
-- ✅ Save favorite animals to revisit later
-- ✅ Clean, responsive UI built with NativeWind
+<div style="display: flex; flex-direction: row; gap: 10px;">
+    <img src="assets/images/Screenshot 2025-03-07 at 1.44.29 PM.png" alt="Screenshot 1" style="width: 200px;">
+    <img src="assets/images/Screenshot 2025-03-07 at 1.44.43 PM.png" alt="Screenshot 2" style="width: 200px;">
+    <img src="assets/images/Screenshot 2025-03-07 at 1.45.11 PM.png" alt="Screenshot 3" style="width: 200px;">
+</div>
 
 ## Tech Stack
 
@@ -17,6 +16,13 @@ A React Native mobile application built with Expo that helps users find and save
 - **Styling**: NativeWind (Tailwind CSS for React Native)
 - **Storage**: AsyncStorage for persisting favorites
 - **Navigation**: Expo Router
+
+## Features
+
+- ✅ Browse adoptable animals with infinite scrolling
+- ✅ View detailed information about each animal
+- ✅ Save favorite animals to revisit later
+- ✅ Clean, responsive UI built with NativeWind
 
 ## Getting Started
 
