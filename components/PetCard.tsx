@@ -4,6 +4,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 
 export function PetCard({
+  id,
   name,
   breeds,
   gender,
@@ -13,8 +14,8 @@ export function PetCard({
 }: Partial<Animal> & { image: string }) {
   return (
     <TouchableOpacity
-      onPress={() => router.push(`/details/${name}`)}
-      className="flex-row border-b border-gray-200  h-fit  items-center p-4 bg-white rounded-xl mb-4  "
+      onPress={() => router.push(`/details/${id}`)}
+      className="flex-row border-b border-gray-200 h-fit items-center p-4 bg-white rounded-xl mb-4"
     >
       <Image
         source={{
@@ -23,16 +24,14 @@ export function PetCard({
         className="w-56 h-56 rounded-xl border border-gray-100"
       />
       <View className="flex-1 ml-4 justify-between">
-        <View className="flex-row justify-between w-full ">
-          <Text className="text-3xl font-semibold overflow-none">
-            {name}
-          </Text>
+        <View className="flex-row justify-between w-full">
+          <Text className="text-3xl font-semibold overflow-none">{name}</Text>
           {/* <TouchableOpacity className="   border-blue-500 rounded-xl">
             <Text className="text-blue-500 font-medium">Adoptable</Text>
           </TouchableOpacity> */}
         </View>
-        <View className="flex-col overflow-hidden mt-2 gap-4 text-gray-400 ">
-          <Text className="text-gray-500 ">{breeds?.primary}</Text>
+        <View className="flex-col overflow-hidden mt-2 gap-4 text-gray-400">
+          <Text className="text-gray-500">{breeds?.primary}</Text>
           <Text className="text-gray-400">{gender}</Text>
           <Text className="text-gray-400">{age}</Text>
           <Text className="text-gray-400">{size}</Text>

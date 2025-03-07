@@ -30,12 +30,17 @@ export default function HomeScreen() {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <PetCard
+            id={item.id}
             name={item.name}
             breeds={item.breeds}
             gender={item.gender}
             age={item.age}
             size={item.size}
-            image={item.photos[0].small}
+            image={
+              item.photos && item.photos.length > 0
+                ? item.photos[0].large
+                : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80"
+            }
           />
         )}
       />

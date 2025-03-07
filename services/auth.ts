@@ -22,7 +22,7 @@ export async function getToken() {
         const data = await response.json();
         await SecureStore.setItemAsync('petfinderToken', data.access_token);
         return data.access_token;
-        
+
     } catch (error) {
         console.error("Failed to get token:", error);
         throw error;
@@ -43,3 +43,15 @@ export async function fetchPets() {
 
     return response.json();
 } 
+
+export async function fetchPet(animalId: string) {
+    const token = await getToken();
+    const response = await fetch(`https://api.petfinder.com/v2/animals/${animalId}`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+    });
+
+    return response.json();
+}
