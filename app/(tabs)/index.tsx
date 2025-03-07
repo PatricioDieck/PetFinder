@@ -1,19 +1,32 @@
 import React from "react";
-import { FlatList, StatusBar } from "react-native";
+import { FlatList, StatusBar, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, Text } from "react-native";
 import { PetCard } from "@/components/PetCard";
 import { Animal } from "@/dummy-data/types";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { fetchPets } from "@/services/auth";
 
 export default function HomeScreen() {
-  const { data, isLoading, error } = useQuery({
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ["animals"],
-    queryFn: fetchPets,
+    queryFn: ({ pageParam = 1 }) => fetchPets(pageParam),
+    getNextPageParam: (lastPage, pages) => {
+      if (lastPage.pagination.current_page < lastPage.pagination.total_pages) {
+        return lastPage.pagination.current_page + 1;
+      }
+      return undefined;
+    },
   });
 
-  const animals = data?.animals || [];
+  const animals = data?.pages.flatMap((page) => page.animals) || [];
 
   if (isLoading) return <Loading />;
   if (error) return <Error />;
@@ -46,6 +59,19 @@ export default function HomeScreen() {
             }
           />
         )}
+        onEndReached={() => {
+          if (hasNextPage) {
+            fetchNextPage();
+          }
+        }}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={() =>
+          isFetchingNextPage ? (
+            <View className="py-4">
+              <ActivityIndicator />
+            </View>
+          ) : null
+        }
       />
     </SafeAreaView>
   );

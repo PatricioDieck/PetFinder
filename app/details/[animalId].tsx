@@ -13,17 +13,18 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchPet } from "@/services/auth";
 import { Ionicons } from "@expo/vector-icons";
 import { Animal } from "@/dummy-data/types";
+import { useFavoritesStore } from "@/store/favorites";
 
 const DetailsScreen = () => {
   const { animalId } = useLocalSearchParams();
+  const { isFavorite, addFavorite, removeFavorite } = useFavoritesStore();
 
-  const { data , isLoading, error } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["pet", animalId],
     queryFn: () => fetchPet(animalId as string),
   });
 
-  const pet : Animal = data?.animal;
-
+  const pet: Animal = data?.animal;
 
   if (isLoading) {
     return (
@@ -54,7 +55,11 @@ const DetailsScreen = () => {
   };
 
   const handleFavorite = () => {
-    console.log("favorite");
+    if (isFavorite(pet.id)) {
+      removeFavorite(pet.id);
+    } else {
+      addFavorite(pet);
+    }
   };
 
   return (
@@ -168,7 +173,11 @@ const DetailsScreen = () => {
           className="bg-gray-200 p-2 rounded-xl"
           onPress={handleFavorite}
         >
-          <Ionicons name="heart-outline" size={28} color="" />
+          <Ionicons
+            name={isFavorite(pet.id) ? "heart" : "heart-outline"}
+            size={28}
+            color={isFavorite(pet.id) ? "#ef4444" : "#000"}
+          />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

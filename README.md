@@ -18,6 +18,6 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 TODO
 
-- [ ] Infinite scroll
-- [ ] store to save favorite pets
+- [x] Infinite scroll
+- [x] store to save favorite pets
 - [ ] 

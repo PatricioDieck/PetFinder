@@ -28,12 +28,12 @@ export async function getToken() {
     }
 }
 
-export async function fetchPets() {
+export async function fetchPets(page = 1) {
     console.log("fetching pets!!!");
     const token = await getToken();
     console.log("token", token);
 
-    const response = await fetch("https://api.petfinder.com/v2/animals?limit=10", {
+    const response = await fetch(`https://api.petfinder.com/v2/animals?limit=20&page=${page}`, {
         headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export async function fetchPets() {
 
     console.log("response", response);
     return response.json();
-} 
+}
 
 export async function fetchPet(animalId: string) {
     const token = await getToken();
