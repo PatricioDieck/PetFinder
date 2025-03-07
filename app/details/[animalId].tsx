@@ -12,15 +12,18 @@ import { useLocalSearchParams, router } from "expo-router";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPet } from "@/services/auth";
 import { Ionicons } from "@expo/vector-icons";
+import { Animal } from "@/dummy-data/types";
+
 const DetailsScreen = () => {
   const { animalId } = useLocalSearchParams();
 
-  const { data, isLoading, error } = useQuery({
+  const { data , isLoading, error } = useQuery({
     queryKey: ["pet", animalId],
     queryFn: () => fetchPet(animalId as string),
   });
 
-  const pet = data?.animal;
+  const pet : Animal = data?.animal;
+
 
   if (isLoading) {
     return (
@@ -77,7 +80,7 @@ const DetailsScreen = () => {
                   : "https://images.unsplash.com/photo-1543466835-00a7907e9de1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80",
             }}
             className="w-full h-72 rounded-xl"
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </View>
 
@@ -128,7 +131,7 @@ const DetailsScreen = () => {
           <View className="mb-4">
             <Text className="text-xl font-semibold mb-2 ">Contact</Text>
             {pet.contact && (
-              <View className="gap-4">
+              <View className="gap-2">
                 <Text className="text-gray-600">
                   Email: {pet.contact.email || "Not provided"}
                 </Text>
@@ -161,7 +164,10 @@ const DetailsScreen = () => {
         >
           <Text className="text-white font-bold text-lg">Adopt Me</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="bg-gray-200 p-2 rounded-xl" onPress={handleFavorite}>
+        <TouchableOpacity
+          className="bg-gray-200 p-2 rounded-xl"
+          onPress={handleFavorite}
+        >
           <Ionicons name="heart-outline" size={28} color="" />
         </TouchableOpacity>
       </View>
